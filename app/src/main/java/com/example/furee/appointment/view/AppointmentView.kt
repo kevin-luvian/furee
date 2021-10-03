@@ -28,47 +28,7 @@ import com.example.furee.ui.theme.FureeTheme
 @Composable
 private fun ContentPreview() {
     FureeTheme {
-        AppointmentView()
-    }
-}
-
-@Composable
-fun AppointmentView(modifier: Modifier = Modifier) {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.background)
-            .verticalScroll(rememberScrollState())
-    ) {
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(30.dp),
-            shape = RoundedCornerShape(15.dp),
-            elevation = 5.dp
-        ) {
-            Column(Modifier.padding(20.dp)) {
-                TitleBar()
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                ServiceCard(
-                    image = painterResource(id = R.drawable.harold),
-                    name = "Dr. Harold Anderson",
-                    field = "Cardiovascular",
-                    appointment = "1h checkup"
-                )
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                Bills(
-                    listOf(
-                        Bill("Appointment Cost", "Consultation fee for 1 hour", 19.99f),
-                        Bill("Admin Cost", "", 15f),
-                    )
-                )
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                PaymentOptions()
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                PayConfirmButton()
-            }
-        }
+        TitleBar()
     }
 }
 
@@ -129,7 +89,7 @@ fun ServiceCard(
 }
 
 @Composable
-fun Bills(bills: List<Bill>) {
+fun Bills(bills: List<Bill>, onPromoClicked: (() -> Unit)? = null) {
     Surface(
         shape = RoundedCornerShape(15.dp),
         color = MaterialTheme.colors.surface,
@@ -153,7 +113,7 @@ fun Bills(bills: List<Bill>) {
                 color = MaterialTheme.colors.background,
                 thickness = 1.dp
             )
-            PromoCodeButton()
+            PromoCodeButton { onPromoClicked?.invoke() }
         }
     }
 }
@@ -193,9 +153,9 @@ fun PaymentOptions() {
 }
 
 @Composable
-fun PayConfirmButton() {
+fun PayConfirmButton(onClick: () -> Unit) {
     Button(
-        {},
+        onClick,
         modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
             MaterialTheme.colors.secondary,
@@ -208,9 +168,9 @@ fun PayConfirmButton() {
 }
 
 @Composable
-fun PromoCodeButton() {
+fun PromoCodeButton(onClick: () -> Unit) {
     Button(
-        onClick = {},
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             MaterialTheme.colors.secondaryVariant,
             MaterialTheme.colors.secondary
