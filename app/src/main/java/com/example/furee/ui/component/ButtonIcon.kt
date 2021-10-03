@@ -12,16 +12,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ButtonIcon(imageVector: ImageVector, modifier: Modifier = Modifier) {
+fun ButtonIcon(id: Int, modifier: Modifier = Modifier) {
     OutlinedButton(
         {},
-        contentPadding = PaddingValues(0.dp),
+        contentPadding = PaddingValues(2.dp),
         modifier = modifier.size(42.dp),
-        shape = RoundedCornerShape(35),
+        shape = RoundedCornerShape(10.dp),
         border = BorderStroke(1.dp, MaterialTheme.colors.background),
         colors = ButtonDefaults.outlinedButtonColors(
             backgroundColor = MaterialTheme.colors.surface,
@@ -32,7 +32,7 @@ fun ButtonIcon(imageVector: ImageVector, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(5.dp),
-            imageVector = imageVector,
+            painter = painterResource(id),
             contentDescription = "Localized description"
         )
     }
