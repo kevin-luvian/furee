@@ -1,17 +1,10 @@
 package com.example.furee.appointment.view
 
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,7 +44,7 @@ fun AppointmentView(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(30.dp),
-            shape = RoundedCornerShape(10),
+            shape = RoundedCornerShape(15.dp),
             elevation = 5.dp
         ) {
             Column(Modifier.padding(20.dp)) {
@@ -82,14 +75,14 @@ fun AppointmentView(modifier: Modifier = Modifier) {
 @Composable
 fun TitleBar() {
     Box(Modifier.fillMaxWidth()) {
-        ButtonIcon(Icons.Filled.Menu, Modifier.align(Alignment.CenterStart))
+        ButtonIcon(R.drawable.ic_menu, Modifier.align(Alignment.CenterStart))
         Text(
             text = "Appointment",
             modifier = Modifier.align(Alignment.Center),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
-        ButtonIcon(Icons.Filled.Info, Modifier.align(Alignment.CenterEnd))
+        ButtonIcon(R.drawable.ic_bell, Modifier.align(Alignment.CenterEnd))
     }
 }
 
@@ -101,7 +94,7 @@ fun ServiceCard(
     appointment: String
 ) {
     Surface(
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(15.dp),
         color = MaterialTheme.colors.primary,
         contentColor = MaterialTheme.colors.onPrimary,
         elevation = 7.dp
@@ -119,6 +112,7 @@ fun ServiceCard(
             Column(
                 Modifier
                     .weight(.75f)
+                    .fillMaxWidth()
                     .padding(start = 20.dp)
             ) {
                 Text(name, fontSize = 17.sp)
@@ -137,7 +131,7 @@ fun ServiceCard(
 @Composable
 fun Bills(bills: List<Bill>) {
     Surface(
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(15.dp),
         color = MaterialTheme.colors.surface,
         contentColor = MaterialTheme.colors.primary,
         elevation = 5.dp
@@ -170,7 +164,7 @@ fun PaymentOptions() {
 
     Surface(
         Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(15.dp),
         color = MaterialTheme.colors.surface,
         contentColor = MaterialTheme.colors.primary,
         elevation = 5.dp
@@ -221,7 +215,7 @@ fun PromoCodeButton() {
             MaterialTheme.colors.secondaryVariant,
             MaterialTheme.colors.secondary
         ),
-        shape = RoundedCornerShape(50),
+        shape = RoundedCornerShape(15.dp),
         border = BorderStroke(1.dp, MaterialTheme.colors.secondary.copy(.2f))
     ) {
         Row(
@@ -229,14 +223,22 @@ fun PromoCodeButton() {
             Arrangement.SpaceBetween,
             Alignment.CenterVertically
         ) {
-            Icon(Icons.Default.ShoppingCart, null)
+            Icon(
+                painterResource(R.drawable.ic_coupon),
+                "coupon icon",
+                Modifier.size(20.dp)
+            )
             Text(
                 "Use Promo Code",
                 Modifier.padding(horizontal = 10.dp),
                 MaterialTheme.colors.primary,
                 fontWeight = FontWeight.Bold
             )
-            Icon(Icons.Default.ArrowForward, null)
+            Icon(
+                painterResource(R.drawable.ic_arrow_next),
+                "arrow next icon",
+                Modifier.size(20.dp)
+            )
         }
     }
 }
