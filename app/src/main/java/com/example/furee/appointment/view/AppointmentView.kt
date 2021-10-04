@@ -1,6 +1,7 @@
 package com.example.furee.appointment.view
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,25 +25,17 @@ import com.example.furee.ui.component.ImageRadioOption
 import com.example.furee.ui.theme.DarkGray
 import com.example.furee.ui.theme.FureeTheme
 
-@Preview
 @Composable
-private fun ContentPreview() {
-    FureeTheme {
-        TitleBar()
-    }
-}
-
-@Composable
-fun TitleBar() {
+fun TitleBar(onMenuClick: () -> Unit) {
     Box(Modifier.fillMaxWidth()) {
-        ButtonIcon(R.drawable.ic_menu, Modifier.align(Alignment.CenterStart))
+        ButtonIcon(onMenuClick, R.drawable.ic_menu, Modifier.align(Alignment.CenterStart))
         Text(
             text = "Appointment",
             modifier = Modifier.align(Alignment.Center),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
-        ButtonIcon(R.drawable.ic_bell, Modifier.align(Alignment.CenterEnd))
+        ButtonIcon({}, R.drawable.ic_bell, Modifier.align(Alignment.CenterEnd))
     }
 }
 
