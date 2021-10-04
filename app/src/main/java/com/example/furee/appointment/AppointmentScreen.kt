@@ -1,42 +1,45 @@
 package com.example.furee.appointment
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.furee.R
 import com.example.furee.appointment.view.*
 import com.example.furee.appointment.viewmodel.Bill
 import com.example.furee.checkout.CheckoutScreen
 import com.example.furee.navigation.NavScreen
 import com.example.furee.promo.PromoScreen
+import com.example.furee.ui.component.ScreenSurface
+import com.example.furee.ui.theme.FureeTheme
+import kotlinx.coroutines.launch
+
+@Preview
+@Composable
+private fun ContentPreview() {
+    val navController = rememberNavController()
+    FureeTheme {
+        AppointmentScreen.View(navController)
+    }
+}
 
 object AppointmentScreen : NavScreen("appointment") {
     @Composable
     override fun View(navController: NavController) {
-        Box(
-            Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(30.dp),
-                shape = RoundedCornerShape(15.dp),
-                elevation = 5.dp
-            ) {
+        val scope = rememberCoroutineScope()
+        SidePanel(navController) { sidePanelState ->
+            ScreenSurface {
                 Column(Modifier.padding(20.dp)) {
-                    TitleBar()
+                    TitleBar(onMenuClick = {
+                        scope.launch { sidePanelState.drawerState.open() }
+                    })
                     Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     ServiceCard(
                         image = painterResource(id = R.drawable.harold),
