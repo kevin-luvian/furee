@@ -16,9 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ButtonIcon(id: Int, modifier: Modifier = Modifier) {
+fun ButtonIcon(onClick: () -> Unit, id: Int, modifier: Modifier = Modifier) {
     OutlinedButton(
-        {},
+        onClick,
         contentPadding = PaddingValues(2.dp),
         modifier = modifier.size(42.dp),
         shape = RoundedCornerShape(10.dp),
